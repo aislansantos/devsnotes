@@ -3,28 +3,30 @@ require('../config.php');
 
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 
-if ($method === 'get') {
+if ($method === 'post') {
 
-    $id = filter_input(INPUT_GET, 'id');
-    if ($id) {
-        $sql = $pdo->prepare("SELECT * FROM notes WHERE id = :id");
-        $sql->bindValue(':id', $id);
+    $title = filter_input(INPUT_POST, 'title');
+    $body = filter_input(INPUT_POST, 'body');
+
+    if ($title && $body) {
+
+        $sql = $pdo->prepare("INSERT INTO notes (title, body) VALUES (:title, :body)");
+        $sql->bindValue(':title', $title);
+        $sql->bindValue(':body', $body);
         $sql->execute();
-        if ($sql->rowCount() > 0) {
-            $data = $sql->fetch(PDO::FETCH_ASSOC);
-            $array['result'] =[
-                'id'=>$data['id'],
-                'title'=>$data['title'],
-                'body'=>$data['body']
-            ];
-        }else{
-            $array['error'] = 'id inexistente';
-        }
+
+        $id = $pdo->lastInsertId();
+
+        $array['result'] = [
+            'id' => $id,
+            'title' => $title,
+            'body' => $body
+        ];
     } else {
-        $array['error'] = 'id nao enviado';
+        $array['error'] = 'campos não enviados';
     }
 } else {
-    $array['error'] = 'Metodo nao permitido (apenas GET)';
+    $array['error'] = 'Metodo nao permitido (apenas POST)';
 }
 
 require('return.php');
