@@ -16,14 +16,14 @@ if ($method === 'delete') {
     $id = filter_var($id);
 
     if ($id) {
-
+        // não precisa verificar um id não existente
         $sql = $pdo->prepare("SELECT * FROM notes WHERE id = :id");
         $sql->bindValue(':id', $id);
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
 
-            $sql = $pdo->prepare("DELETE FOM notes WHERE id = :id");
+            $sql = $pdo->prepare("DELETE FROM notes WHERE id = :id");
             $sql->bindValue(':id', $id);
             $sql->execute();
         } else {
