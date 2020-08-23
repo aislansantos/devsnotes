@@ -1,0 +1,36 @@
+API tem dois processos REQUISIÇÃO e RETORNO
+
+REQUISIÇÃO ->Funicona igual o acesso a um site normal
+usamos os metodos GET e POST.
+ainda temos alguns outros metodos como PUT, DELETE, OPTIONS.,
+Pode mandar juntos Cabeçalhos
+
+RETORNO ->pode ser em:
+-Texto
+-xml
+-Json
+
+
+-------------------------------- CRIAÇÃO DE API ---------------------------------
+DEVSNOTES: (Sistema de anotações simples)                                       |
+O que o projeto precisa fazer?                                                  |
+  - Listar as anotações                                                         |
+  - Pegar informações de UMA anotação.                                          |
+  - Inserir uma anotação nova                                                   |
+  - Atualizar uma anotação                                                      |
+  - Deletar uma anotação                                                        |
+                                                                                |
+  Qual a estrutura de dados ?                                                   |
+  - Local para armazenar as anotações                                           |
+  -- ID                                                                         |
+  -- title                                                                      |
+  -- body                                                                       |
+                                                                                |
+  Quais os endpoints ?                                                          |
+  --> Modelo = (METODO) /url (PARÂMETROS)                                       |
+  - (GET) /api/notes                                                            |
+  - (GET) /api/note/123                                                         |
+  - (POST) /api/note (title, body)                                              |
+  - (PUT) /api/note/123 (title, body)                                           |
+  - (DELETE) /api/note/123                                                      |
+  -------------------------------------------------------------------------------
